@@ -62,27 +62,27 @@ int main() {
 	while (move != 'q') {
 
 
-		move = _getch();
+		move = _getch(); //{auses the console until a key is hit and it returns a char for the value of the key pressed into "move"
 
-		if (move == 'e') {
+		if (move == 'e') { //If 'e' is pressed, call the player "Attack" function
 			playerAttack(player);
 		}
-		else if (move == 'w' && player.Y > 0) {
+		else if (move == 'w' && player.Y > 0) { //Moves the player up when 'w' is pressed
 			pastPlayer.X = player.X;
 			pastPlayer.Y = player.Y;
 			player.Y--;
 		}
-		else if (move == 's' && player.Y < yMax-1) {
+		else if (move == 's' && player.Y < yMax-1) { //Moves the player down when 's' is pressed
 			pastPlayer.X = player.X;
 			pastPlayer.Y = player.Y;
 			player.Y++;
 		}
-		else if (move == 'a' && player.X > 0) {
+		else if (move == 'a' && player.X > 0) { //Moves the player left when 'a' is pressed
 			pastPlayer.X = player.X;
 			pastPlayer.Y = player.Y;
 			player.X--;
 		}
-		else if (move == 'd' && player.X != xMax-1) {
+		else if (move == 'd' && player.X != xMax-1) { //Moves the player right when 'd' is pressed
 			pastPlayer.X = player.X;
 			pastPlayer.Y = player.Y;
 			player.X++;
@@ -91,39 +91,30 @@ int main() {
 
 		//coin calculations
 		if (player.X == coin.X && player.Y == coin.Y) {
-			coin.X = (rand() % xMax);
-			coin.Y = (rand() % yMax);
-			points++;
-			//pointCoord.X++;
-			SetConsoleCursorPosition(hStdOut, pointCoord);
-			cout << points << endl;
+			coin.X = (rand() % xMax); //These two lines regenerate the coordinates for the coin after it is collected
+			coin.Y = (rand() % yMax); //^^
+			points++; //increase the coin/points counter
+			SetConsoleCursorPosition(hStdOut, pointCoord);//adjusts the print cursor to the score placement
+			cout << points << endl; //replaces the old points with the updates number
 		}
 
 
-
-		WriteConsoleOutputCharacter(hStdOut, L"#", 1, pastPlayer, &dw);
-		WriteConsoleOutputCharacter(hStdOut, L"X", 1, player, &dw);
-		e1Past.X = e1.X;
-		e1Past.Y = e1.Y;
+		/* THIS HANDLES ALL OF THE SCREEN MOVEMENT */
+		WriteConsoleOutputCharacter(hStdOut, L"#", 1, pastPlayer, &dw); //This replaces the player's old position with a filler '#'
+		WriteConsoleOutputCharacter(hStdOut, L"X", 1, player, &dw); //This inserts an 'X' into the player's new position
+		e1Past.X = e1.X; //records the current player position for next time around
+		e1Past.Y = e1.Y; //^^
 		enemyAI(player);
-		WriteConsoleOutputCharacter(hStdOut, L"#", 1, e1Past, &dw);
-		WriteConsoleOutputCharacter(hStdOut, L"E", 1, e1, &dw);
+		WriteConsoleOutputCharacter(hStdOut, L"#", 1, e1Past, &dw); //This replaces the Enemy's old position with a filler '#'
+		WriteConsoleOutputCharacter(hStdOut, L"E", 1, e1, &dw); //This inserts an 'E' into the Enemy's new position
 
-		WriteConsoleOutputCharacter(hStdOut, L"O", 1, coin, &dw);
+		WriteConsoleOutputCharacter(hStdOut, L"O", 1, coin, &dw); //Replaces the 'tile' with an 'O' to symbolize the coin
 
 		//Handles player coordinate printing
 		SetConsoleCursorPosition(hStdOut, playerDisplay);
 		cout << "           " << endl;
 		SetConsoleCursorPosition(hStdOut, playerDisplay);
 		cout << player.X+1 << "," << player.Y+1 << endl;
-
-		//WILL FIX LATER, DO NOT FORGET PLS AND THANK YOU
-		/*cout << endl << endl;
-		cout << "Points: " << points << endl;
-		cout << "X Coord: " << player.X << endl;
-		cout << "y Coord: " << player.Y << endl;
-		cout << endl << "Coin X: " << coin.X << "  Y: " << coin.Y << endl;
-		cout << "Enemy X: " << e1.X << "  Y: " << e1.Y << endl;*/
 
 	}
 
@@ -144,15 +135,6 @@ void gamePrint(COORD player) {
 				coin.Y = (rand() % yMax);
 				points++;
 			}
-			/*else if (player.X == x && player.Y == y) {
-				cout << "X";
-			}*/
-			/*else if (coin.X == x && coin.Y == y) {
-				cout << "O";
-			}*/
-			/*else if (e1.X == x && e1.Y == y) {
-				cout << "E";
-			}*/
 			else {
 				cout << "#";
 			}
