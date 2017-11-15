@@ -235,6 +235,28 @@ void enemyAI(COORD player) {
 	}
 }
 
-//Coming back to later
+//Finish later, too tired right now
 /*void shop(){
+
+	system("cls");
+
+	vector<int> item;
+	for (int i = 0; i < 3; i++) {
+		item.push_back((rand() % 100));
+	}
+
+	int item1 = (rand() % 100);
+	int item2 = (rand() % 100);
+	int item3 = (rand() % 100);
+
+	cout << "Items For sale:" << endl;
+
+	for (int i = 0; i < 3; i++) {
+		if (item[i] >= 0 && item[i] < 20) {
+			cout << "----------------------------------------" << endl;
+			cout << "Item: Heart Container" <<
+		}
+	}
+	
+
 }*/
